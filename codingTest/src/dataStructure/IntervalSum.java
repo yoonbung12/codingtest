@@ -13,7 +13,9 @@ public class IntervalSum {
 		
 		StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
 		
+		//	숫자 갯수
 		int suNo = Integer.parseInt(stringTokenizer.nextToken());
+		// 질의 갯수
 		int quizNo = Integer.parseInt(stringTokenizer.nextToken());
 		long[] S = new long[suNo + 1];
 		stringTokenizer = new StringTokenizer(bufferedReader.readLine());
