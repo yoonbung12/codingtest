@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class QuickSort {
 
 	public static void main(String[] args) throws IOException {
-		// k번째 수 구하기
+		// k번째 수 구하기11004번
 		// N(숫자의 개수), K(k번째 수), A[](숫자 데이터 저장 배열)
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(bf.readLine());
@@ -30,7 +30,7 @@ public class QuickSort {
 			else if(K  < pivot)
 				quickSort(A, S, pivot - 1, K); 	//K가 pivot보다 작으면 왼쪽 그룹만 정렬 수행하기
 			else
-				quickSort(A, pivot + 1, E, K);
+				quickSort(A, pivot + 1, E, K);	//K가 pivot보다 크면 오른쪽 그룹만 정렬 수행하기
 		}
 	}
 	private static int partition(int[] A, int S, int E) {
@@ -39,9 +39,10 @@ public class QuickSort {
 			return E;
 		}
 		int M = (S + E) / 2; //M = 중앙값
-		swap(A, S, M);
+		swap(A, S, M);	//	중앙값을 1번째 요소로 이동하기
 		int pivot = A[S];
 		int i = S + 1, j = E;
+		
 		while(i <= j) {
 			while(pivot < A[j] && j > 0) {	//피벗보다 작은 수가 나올때까지 j--
 				j--;
