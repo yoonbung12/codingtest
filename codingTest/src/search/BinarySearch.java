@@ -1,48 +1,58 @@
 package search;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class BinarySearch {
-
-	public static void main(String[] args) {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException {
 		// 1920번 원하는 정수 찾기(이진 탐색)
-		Scanner sc = new Scanner(System.in);
-		//N(정렬할 수 개수), M(탐색할 숫자의 개수)
-		//A(정렬할 배열 선언)
-		int N = sc.nextInt();
+
+		//N개의 정수 A[N]개,이진탐색이니 정렬(Sort) 사용
+		int N = Integer.parseInt(br.readLine());
 		int[] A = new int[N];
-		for(int i = 0; i < N; i++) {//N의 개수만큼 반복하기
-			A[i] = sc.nextInt();
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i < N; i++) {
+			A[i] = Integer.parseInt(st.nextToken()) - 1;
 		}
-		Arrays.sort(A);	//배열 정렬하기
-		int M = sc.nextInt();
-		for(int i = 0; i < M; i++) {//M의 개수만큼 반복하기
-			boolean find = false;
-			int target = sc.nextInt();	//찾아야하는 수(target)
-			//이진 탐색 시작
-			int start = 0;	//시작 인덱스
-			int end = A.length - 1; //종료 인덱스
-			while(start <= end) {
-				int midi = (start + end) /2; //midi(중앙값)
-				int midV = A[midi];
-				if(midV > target) {
-					end = midi - 1;
-				} else if(midV < target) {
-					start = midi + 1;
-				} else {
-					find = true;
+		//배열은 정렬되어야함
+		Arrays.sort(A);
+		//M의 개수 
+		int M = Integer.parseInt(br.readLine());
+		st = new StringTokenizer(br.readLine());
+		for(int i =0; i<M; i++ ) {
+			int num = Integer.parseInt(st.nextToken()) - 1; //검색 하려는 수
+			
+			int left = 0;				//처음 인덱스
+			int right = N -1;			//마지막 인덱스
+			int mid = (left + right)/2;	//중앙 인덱스
+			
+			while(left <= right) {
+				mid = (left + right)/2;
+				if(num == A[mid]) {	//찾으려는 수가 있는 경우
 					break;
+					
+				} else if(num < A[mid]) {
+					right = mid - 1;	// 찾으려는 수가 mid 보다 작은경우
+				} else {
+					left = mid + 1;	
 				}
-				
 			}
-			if(find) {
-				System.out.println(1);
-			} else {
-				System.out.println(0);
-			}
+			if(num == A[mid])
+				bw.write("1\n");
+			else
+				bw.write("0\n");
+			
 		}
 
+		bw.close();
 	}
 
 }
