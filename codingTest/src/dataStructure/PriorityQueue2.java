@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class PriorityQueue2 {
 
 	public static void main(String[] args)  {
-
+//1744
 //		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(System.in);
 		//N(카드 묶음 갯수)
