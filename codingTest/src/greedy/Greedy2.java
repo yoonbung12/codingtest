@@ -12,11 +12,12 @@ public class Greedy2 {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int[][] A = new int[N][2];
-		for(int i = 0; i< N; i++) {
+		
+		for(int i = 0; i< N; i++) {	//종료 시간 기준으로 정렬, 종료 시간이 같으면 시작 시간 기준 정렬
 			A[i][0] = sc.nextInt();
 			A[i][1] = sc.nextInt();
 		}
-		Arrays.sort(A, new Comparator<int[]>() {
+		Arrays.sort(A, new Comparator<int[]>() { 
 
 			@Override
 			public int compare(int[] S, int[] E) {
