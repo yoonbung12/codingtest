@@ -13,7 +13,7 @@ public class SumOfSection3 {
 		long[] C = new long[M];
 		long answer = 0;
 		S[0] = sc.nextInt();
-		for(int i = 1; i <= N; i++) {	//합 배열 만들기
+		for(int i = 1; i < N; i++) {	//합 배열 만들기
 			S[i] = S[i - 1] + sc.nextInt();
 		}
 		for(int i = 0; i< N; i++) {	//합 배열의 모든 값에 %연산 수행하기
