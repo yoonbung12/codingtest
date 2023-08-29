@@ -5,77 +5,84 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+
+
 public class SlidingWindow {
 	static int myArr[];
 	static int checkArr[];
 	static int checkSecret; 
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException  {
 		// DNA 비밀번호(12891번)
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(bf.readLine());
-		// 문자열의 크기
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		//문자열의 크기
 		int S = Integer.parseInt(st.nextToken());
-		// 부분 문자열의 크기
+		//부분 문자열 길이
 		int P = Integer.parseInt(st.nextToken());
-		int Result = 0;
-		// 비밀번호 체크 배열
+		//정답값 result
+		int result=0;
+		//비밀번호 체크하는 문자열
 		checkArr = new int[4];
-		// 현재 상태 배열
-		myArr = new int[4];
-		// 전체 문자열
+		//전체 문자열 받기
+		// checkSecret 얼마나 맞는지 확인하기 위해 현재 상태배열이랑 체크문자열이랑
 		char A[] = new char[S];
-		// 몇개의 문자와 관련된 개수를 충족햇는지 판단하는 변수)
+		//현재 상태 배열
+		myArr = new int[4];
 		checkSecret = 0;
 		
-		
-		A = bf.readLine().toCharArray();
-		st = new StringTokenizer(bf.readLine());
-		
-		for(int i = 0; i < 4; i++	) {
+		A = br.readLine().toCharArray();
+		st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < 4; i++) {
 			checkArr[i] = Integer.parseInt(st.nextToken());
-			// 예외처리
-			if(checkArr[i] == 0) {
+			if(checkArr[i] ==  0	) {
 				checkSecret++;
 			}
 		}
-		for(int i = 0; i < P; i++	) {	//부분 문자열 받을때 세팅
+		
+		for(int i = 0; i < P; i++) { //처음 부분문자열 받을때 세팅
 			Add(A[i]);
 		}
-		if(checkSecret == 4	) Result++;
+		if(checkSecret == 4) result++;
 		
-		// 슬라이딩 윈도우
-		for(int i = P; i < S; i++	) {
+		//슬라이딩 윈도우
+		for(int i = P; i < S; i++) {
 			int j = i - P;
 			Add(A[i]);
 			Remove(A[j]);
-			if(checkSecret == 4	) Result++;
+			if(checkSecret == 4	) result++;
 		}
 		
-		System.out.println(Result);
-		bf.close();
+		System.out.println(result);
 
+		
+
+		
+		
 	}
 
 	private static void Remove(char c) {
 		switch(c) {
 		case 'A':
-			//현재 나의 부분 문자열상태 가 상태배열 
-			if(myArr[0] == checkArr[0] ) checkSecret--;
+			
+			if(myArr[0] == checkArr[0]) checkSecret--;
 			myArr[0]--;
 			break;
 		case 'C':
-			if(myArr[1] == checkArr[1] ) checkSecret--;
+			if(myArr[1] == checkArr[1]) checkSecret--;
 			myArr[1]--;
-			break;			
+			break;
 		case 'G':
-			if(myArr[2] == checkArr[2] ) checkSecret--;
+			if(myArr[2] == checkArr[2]) checkSecret--;
 			myArr[2]--;
-			break;			
+			break;
 		case 'T':
-			if(myArr[3] == checkArr[3] ) checkSecret--;
+			if(myArr[3] == checkArr[3]) checkSecret--;
 			myArr[3]--;
-			break;			
+			break;
+			
+		
 		}
 		
 	}
@@ -84,26 +91,22 @@ public class SlidingWindow {
 		switch(c) {
 		case 'A':
 			myArr[0]++;
-			//현재 나의 부분 문자열상태 가 상태배열 
-			if(myArr[0] == checkArr[0] ) checkSecret++;
+			if(myArr[0] == checkArr[0]) checkSecret++;
 			break;
 		case 'C':
 			myArr[1]++;
-			//현재 나의 부분 문자열상태 가 상태배열 
-			if(myArr[1] == checkArr[1] ) checkSecret++;
-			break;			
+			if(myArr[1] == checkArr[1]) checkSecret++;
+			break;
 		case 'G':
 			myArr[2]++;
-			//현재 나의 부분 문자열상태 가 상태배열 
-			if(myArr[2] == checkArr[2] ) checkSecret++;
-			break;			
+			if(myArr[2] == checkArr[2]) checkSecret++;
+			break;
 		case 'T':
 			myArr[3]++;
-			//현재 나의 부분 문자열상태 가 상태배열 
-			if(myArr[3] == checkArr[3] ) checkSecret++;
-			break;			
+			if(myArr[3] == checkArr[3]) checkSecret++;
+			break;
+			
 		}
-		
 		
 	}
 
