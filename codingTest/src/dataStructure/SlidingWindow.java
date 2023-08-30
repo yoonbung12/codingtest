@@ -55,6 +55,7 @@ public class SlidingWindow {
 		}
 		
 		System.out.println(result);
+		br.close();
 
 		
 
