@@ -1,51 +1,53 @@
 package dataStructure;
 
-import java.util.Scanner;
+import java.io.*;
 import java.util.Stack;
 
 public class Stack1 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		// 스택 수열 1874번
-		Scanner sc = new Scanner(System.in);
-		//수열 개수N,A[](수열 배열)
-		int N = sc.nextInt(); 
-		int A[] = new int[N];
-		
-		//for(N만큼 반복)
+		//N(수열개수), A[](기본 배열)
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		int[] A = new int[N];
 		for(int i = 0; i < N; i++) {
-			A[i] = sc.nextInt();
+			A[i] = Integer.parseInt(br.readLine());
 		}
-		
 		Stack<Integer> stack = new Stack<>();
-		//오름차순 자연수 num
+		StringBuffer sb = new StringBuffer();
+		//오름 차순(자연수)
 		int num = 1;
 		boolean result = true;
-		StringBuffer bf = new StringBuffer();
+		
 		for(int i = 0; i < A.length; i++) {
-			//수열에 있는 값
-			int su = A[i];
+			int su = A[i];	//현재 수열의 수
+			//현재 수열값 >= 자연수
 			if(su >= num) {
-				while(su >= num) {	//값이 같아질때까
+				while(su >= num) { //현재 수열값이 자연수랑 같아질 때까지 push()수행
 					stack.push(num++);
-					//출력
-					bf.append("+\n");
+					sb.append("+\n"); //append 는 (+)저장
+					
 				}
-				//같아지면 빼냄
 				stack.pop();
-				bf.append("-\n");
-			} else {
+				sb.append("-\n"); //(-) 저장
+
+			}
+			else {			//현재 수열 값 < 오름차순 자연수:pop()을 수행해 수열값을 꺼냄
 				int n = stack.pop();
-				if(n > su	) {
+				//스택의 가장 위의 수가 만들어야 하는 수열의 수보다 크면 수열을 출력 불가능
+				if(n > su) {
 					System.out.println("NO");
 					result = false;
 					break;
-				} else {
-					bf.append("-\n");
+				}
+				else {
+					sb.append("-\n");
 				}
 			}
 		}
-		if(result) System.out.println(bf.toString());
+		if(result) System.out.println(sb.toString());
+		
 	}
 
 }
