@@ -43,7 +43,7 @@ public class MergeSort {
 		if(e -s < 1)
 			return;
 		//중간값(m) 
-		int m = s + (e+s)/2 ;
+		int m = s + (e - s)/2 ;
 		//재귀함수
 		merge_sort(s, m);
 		merge_sort(m + 1, e);
