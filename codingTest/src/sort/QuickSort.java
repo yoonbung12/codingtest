@@ -30,7 +30,7 @@ public class QuickSort {
 		
 	}
 
-	private static void quickSort(int[] A, int start, int end, int K) {
+	private static void quickSort(int[] A, int start, int end, int K) { //start(index),end(index)---twoPointer활
 		
 		if(start < end) {
 			int pivot = partition(A, start, end);
