@@ -7,48 +7,54 @@ import java.util.StringTokenizer;
 
 public class MergeSort2 {
 
-	public static int[] A, tmp;
+	//A(정렬할 배열 선언)
+	public static int A[];
+	//tmp(임시로 저장할 배열)
+	public static int tmp[];
+	//result(swap한 갯수)
 	public static long result;
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	
+	public static void main(String[] args) throws NumberFormatException, IOException  {
 		// 버블정렬2(1517번)
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		// N(정렬할 수 개수), A정렬할 배열 선언, tmp(정렬할 때 잠시 사용할 임시배열 선언
+		//정렬할 수 선언(N)
 		int N = Integer.parseInt(br.readLine());
-		A = new int[N + 1];
+		A = new  int [N + 1];
 		tmp = new int[N + 1];
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		// for(N의 갯수 만큼){A 배열 선언}
 		for(int i = 1; i <= N; i++) {
-			A[i] = Integer.parseInt(st.nextToken());
+			A[i]= Integer.parseInt(st.nextToken());
 		}
-		//병합 정렬 수행하기
 		result = 0;
-		merget_sort(1, N);
+		//병합정렬 수행
+		merge_sort(1, N);
+
 		System.out.println(result);
-
+		
 	}
-	//s(시작점),e(종료점),m(중간점)
-	private static void merget_sort(int s, int e) {
 
-		if(e - s <1)
+	private static void merge_sort(int s, int e) {
+		if(e - s < 1)
 			return;
-		int m = s + (e - s) /2;
-		//재귀함수 형태로 구현하기
-		merget_sort(s, m);
-		merget_sort(m + 1, e);
+		int m = s + (e -s)/2;
+		
+		//재귀 함수 형태로 구현
+		merge_sort(s, m);
+		merge_sort(m+1, e);
+		//임시 저장 배열tmp
 		for(int i = s; i <= e; i++) {
 			tmp[i] = A[i];
 			
 		}
-		//두 그룹을 병합하는 로직
-		int k = s;
+		int k = s; //시작점 을 넣어줘야함.
 		int index1 = s;
-		int index2 = m + 1;
-		//뒤쪽 데이터 값이 더 작아서선택될때 Swap이 일어났다고 가정하고,현재 남아 있는 앞쪽 데이터 개수만큼 결괏값을 더함
-		while(index1 <= m && index2 <= e) {
+		int index2 = m+1;
+		while(index1 <= m && index2 <= e ) { //두그룹 병합 로직
+			//뒤쪽 데이터 값이 더 작아서 선택되면, swap이 일어났다고 가정하고, 
+			//현재 남아있는 앞쪽 데이터 갯수 만큼 결과갑을 더한다.
 			if(tmp[index1] > tmp[index2]) {
 				A[k] = tmp[index2];
-				result = result + index2 - k;	//뒤쪽 데이터 값이 작은 경우result 업데이트
+				result = result + index2 -k; //뒤쪽 데이터 값이 작은 경우 result업데이
 				k++;
 				index2++;
 			} else {
@@ -66,8 +72,7 @@ public class MergeSort2 {
 			A[k] = tmp[index2];
 			k++;
 			index2++;
-		}
-		
+		}		
 	}
 
 }
