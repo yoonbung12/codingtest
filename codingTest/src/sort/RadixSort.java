@@ -26,7 +26,11 @@ public class RadixSort {
 		}
 		br.close();
 		Radix_sort(A, 5); // 5는 만의 자릿수보자 작아서 5를 적었다.
-		
+		for(int i = 0; i < N; i++) {
+			bw.write(A[i] + "\n");
+		}
+		bw.flush();
+		bw.close();
 	
 		
 	}
