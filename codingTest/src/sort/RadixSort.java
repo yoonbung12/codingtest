@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 public class RadixSort {
 
 	private static int[] A;		//정렬할 배열(A)
-	
+	private static long result;
 
 	public static void main(String[] args) throws NumberFormatException, IOException  {
 		// 수 정렬하기3(10989번)-기수 정렬 활용 
