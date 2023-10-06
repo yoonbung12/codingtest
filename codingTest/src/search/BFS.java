@@ -42,7 +42,7 @@ public class BFS {
 			for(int k = 0; k < 4;  k++) {
 				//상하좌우로 탐색
 				int x = now[0] + dx[k];
-				int y = now[1] + dx[k];
+				int y = now[1] + dy[k];
 				if(x >= 0 && y >= 0 && x < N && y < M) {//유효성 검사, 배열을 넘어가면 안되고
 					if(A[x][y] != 0 && !visited[x][y]) { //0 이어서 갈수 없거나, 방문했던 배열이면 안됨
 						//이제 갈 수 있는 곳!!
