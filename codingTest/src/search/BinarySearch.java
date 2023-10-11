@@ -1,58 +1,70 @@
 package search;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BinarySearch {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	static StringTokenizer st;
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) throws IOException  {
 		// 1920번 원하는 정수 찾기(이진 탐색)
-
-		//N개의 정수 A[N]개,이진탐색이니 정렬(Sort) 사용
-		int N = Integer.parseInt(br.readLine());
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		//N(정렬할 수 개수),
+		int N = Integer.parseInt(st.nextToken());
+		// A(정렬할 배열 선언)
 		int[] A = new int[N];
-		st = new StringTokenizer(br.readLine());
-		for(int i=0; i < N; i++) {
-			A[i] = Integer.parseInt(st.nextToken()) - 1;
+		
+		for(int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
+			A[i] = Integer.parseInt(st.nextToken());
 		}
-		//배열은 정렬되어야함
+		
+		// 데이터를 정렬을 해놓고 나서 이진 탐색 시작
 		Arrays.sort(A);
-		//M의 개수 
-		int M = Integer.parseInt(br.readLine());
+		
+		//  M(찾아야할 수 갯수)
 		st = new StringTokenizer(br.readLine());
-		for(int i =0; i<M; i++ ) {
-			int num = Integer.parseInt(st.nextToken()) - 1; //검색 하려는 수
+		int M = Integer.parseInt(st.nextToken());
+		
+		for(int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine());
+			boolean find = false;
+			int target = Integer.parseInt(st.nextToken()); //target = 찾아야 하는 수)
 			
-			int left = 0;				//처음 인덱스
-			int right = N -1;			//마지막 인덱스
-			int mid = (left + right)/2;	//중앙 인덱스
+			// 이진 탐색 시작
+			int start = 0; // 시작 인덱스
+			int end = A.length -1;
 			
-			while(left <= right) {
-				mid = (left + right)/2;
-				if(num == A[mid]) {	//찾으려는 수가 있는 경우
-					break;
+			//시작 인덱스가 종료 인덱스랑 같아지면 종료!!
+			while(start <= end) {
+				int midi = (start + end) / 2; //중간인덱스
+				int midv = A[midi]; //중간 익덱스에 들어 있는 값
+	
+				if(midv > target) {
+					end = midi - 1;
+	
+				} else if(midv < target) {
+					start = midi + 1;
 					
-				} else if(num < A[mid]) {
-					right = mid - 1;	// 찾으려는 수가 mid 보다 작은경우
 				} else {
-					left = mid + 1;	
+					find = true;
+					break;
 				}
+				
 			}
-			if(num == A[mid])
-				bw.write("1\n");
-			else
-				bw.write("0\n");
 			
+			if(find) {
+				System.out.println(1);
+				
+			} else {
+				System.out.println(0);
+			}
 		}
-
-		bw.close();
+		
 	}
 
 }
