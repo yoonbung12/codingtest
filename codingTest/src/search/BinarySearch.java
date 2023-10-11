@@ -17,9 +17,9 @@ public class BinarySearch {
 		int N = Integer.parseInt(st.nextToken());
 		// A(정렬할 배열 선언)
 		int[] A = new int[N];
-		
+
+		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
 			A[i] = Integer.parseInt(st.nextToken());
 		}
 		
@@ -30,8 +30,8 @@ public class BinarySearch {
 		st = new StringTokenizer(br.readLine());
 		int M = Integer.parseInt(st.nextToken());
 		
+		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < M; i++) {
-			st = new StringTokenizer(br.readLine());
 			boolean find = false;
 			int target = Integer.parseInt(st.nextToken()); //target = 찾아야 하는 수)
 			
