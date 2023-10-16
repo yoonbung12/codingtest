@@ -6,41 +6,38 @@ import java.io.InputStreamReader;
 
 public class BinarySearch3 {
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException  {
 		
-		// N(배열의 크기), K(구하고자 하는 index)
-		//Start 인덱스 = 1
-		//end index = k
+		//  P1300_k번째 수
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//배열의 크기(N), 구하고자 하는index(K)
 		int N = Integer.parseInt(br.readLine());
 		int K = Integer.parseInt(br.readLine());
+		//start(시작인덱스 = 1), end(종료 인덱스 =k)
+		long start = 1;
+		long end = K;
+		long ans = 0;
 		
-		// x는 lo <= x <= hi 범위를 갖는다
-		long lo = 1;
-		long hi = K;
-		
-		// 이진탐색 수행
-		while(lo < hi) {
-			long mid = (lo + hi) /2; 	//임의의 x(mid)를 중간값으로 갖는다.
-			long count = 0;
-			/*
-			 *  임의의 x에 대해 i번 째 행을 나눔으로써 x보다 작거나 같은 원소의 개수
-			 *  누적 합을 구한다.
-			 *  이 때 각 행의 원소의 개수가 N(열 개수)를 초과하지 않는 선에서 합해주어야 한다.   
-			 */
+		//이진 탐색수행
+		while(start <= end) {
+			long middle = (start + end) /2; //중간 인덱스
+			long cnt = 0;
 			
-			for(int i = 1; i<= K; i++) {
-				count += Math.min(mid / i,N);
+			//중앙값 보다 작은 수는 몇 개인지 계산
+			for(int i = 1; i <= N; i++) {
+				cnt += Math.min(middle / i, N); //작은 수를 카운트 하는 핵심로직	
 			}
-			// count가 많다는 것은 임의의 x(mid)보다 작은 수가 B[K]보다 많다는 뜻
-			if(K <= count	) {
-				hi = mid;
+			if(cnt < K) {
+				start = middle + 1;
 				
 			} else {
-				lo = mid + 1;
+				ans = middle; //현재 단계의 중앙값을 정답 변수에 저장하기
+				end = middle - 1;
+				
 			}
 		}
-		System.out.println(lo);
+		
+		System.out.println(ans);
 		
 
 	}
