@@ -1,30 +1,34 @@
 package greedy;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Greedy1 {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		//N(동전갯수), K(목표금액)
-		//A(동전 데이터 배열)
-		int N = sc.nextInt();
-		int K = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		// N(동전개수), K(목표금액), A(동전 데이터 배열)
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
 		int[] A = new int[N];
-		for(int i=0; i<N; i++) {
-			A[i] = sc.nextInt();
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i = 0; i < N; i++) {
+			A[i] = Integer.parseInt(st.nextToken());
 		}
-		// 동전 갯수 = count
+		
+		//greedy 알고리즘 -> 최대한 큰 동전 사용하
 		int count = 0;
-		// 가치가 큰 동전부터 선택해야 개수를 최소로 구성할 수 있다.
-		for(int i = N-1; i>=0; i--) {
-			if(A[i] <= K) {	// 현재 동전 액수가 K보다 작으면
-				count += (K/A[i]);
-				K = K % A[i];	//K를 현재 동전을 사용하고 남은 금액으로 계산
+		for(int i = N - 1; i >= 0; i--) {
+			if(A[i] <= K) {
+				count += (K / A[i]);
+				K = K % A[i];
 			}
 		}
 		System.out.println(count);
-
 	}
 
 }
