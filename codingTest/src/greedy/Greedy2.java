@@ -1,44 +1,38 @@
 package greedy;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.PriorityQueue;
 
 public class Greedy2 {
 
-	public static void main(String[] args) {
-
-		//N(회의 개수), A(회의 정보 저장)배열
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		int[][] A = new int[N][2];
-		
-		for(int i = 0; i< N; i++) {	//종료 시간 기준으로 정렬, 종료 시간이 같으면 시작 시간 기준 정렬
-			A[i][0] = sc.nextInt();
-			A[i][1] = sc.nextInt();
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		//카드 정렬하기 1715(백준)
+		BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));
+		//카드 묶음수N
+		int N = Integer.parseInt(br.readLine());
+		//우선 순위큐 선언
+		PriorityQueue pq = new PriorityQueue();
+		for(int i = 0; i< N; i++) {
+			//우선순위큐에 데이터 저장하
+			int data = Integer.parseInt(br.readLine());
+			pq.add(data);
 		}
-		Arrays.sort(A, new Comparator<int[]>() { 
-
-			@Override
-			public int compare(int[] S, int[] E) {
-
-				if(S[1] == E[1]) { //종료 시간이 같을때
-					return S[0] - E[0];
-					
-				}
-				return S[1] - E[1];
-			}
+		int data1 = 0;
+		int data2 = 0; 
+		int sum = 0;
+		//우선순위큐큐 크기가 1이 될때까지 반복
+		while(pq.size() != 1) {
+			data1 = (int)pq.remove(); //2개 카드 묶음을 큐에서 뽑음(remove)
+			data2 = (int)pq.remove(); 
+			sum += data1 + data2; //2개 카드 묶음을 합치데 필요한 비교 횟수를 결과값에더함
+			pq.add(data1 + data2);
 			
-		});
-		int count = 0;
-		int end = -1;
-		for(int i =0; i< N; i++) {
-			if(A[i][0] >= end) {	//겹치지 않는 다음 회의가 나온 경우
-				end = A[i][1];
-				count++;
-			}
 		}
-		System.out.println(count);
+		System.out.println(sum);
+		
+		
 	}
 
 }
